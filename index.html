@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="main.css" />
+    <script
+      async
+      defer
+      data-domain="kdotoje.porgazeen.cz"
+      src="https://analytics.michaljanocko.com/js/plausible.js"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Roboto+Slab:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <title>PORGazeen — kdo to je?</title>
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <header>
+      <a href="https://kdotoje.porgazeen.cz"><h1>PORGazeen</h1></a>
+    </header>
+    <div
+      id="main"
+      x-data="{ people: [], query: '' }"
+      x-init="people = await getPeople()"
+    >
+      <p>Zadejte iniciály</p>
+      <input type="text" x-model="query" autofocus />
+      <table>
+        <template x-for="person in people" :key="person.name.join()">
+          <tr x-show="include(query.toLowerCase(), person)">
+            <td x-text="person.name.join('  ')"></td>
+            <td><b x-text="showWho(person.who)"></b></td>
+          </tr>
+        </template>
+      </table>
+      <p>Vytvořil <b>Michal Janočko</b>.</p>
+    </div>
+  </body>
+</html>
