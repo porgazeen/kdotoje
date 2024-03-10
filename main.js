@@ -28,11 +28,11 @@ function showWho (who) {
   const gradYear = parseInt(who)
 
   if (!isNaN(gradYear)) {
-    if (month < 9) {
-      return showGrade(gradYear - year)
-    } else {
-      return showGrade(gradYear - year - 1)
-    }
+    const grade = month < 9
+      ? gradYear - year
+      : gradYear - year - 1
+
+    return grade < 0 ? who : showGrade(grade)
   } else {
     return who
   }
